@@ -69,14 +69,14 @@ router.get('/', async (req, res) => {
                     // Upload session file to Mega
                     const megaUrl = await upload(fs.createReadStream(`${dirs}/creds.json`), `${generateRandomId()}.json`);
                     let stringSession = megaUrl.replace('https://mega.nz/file/', ''); // Extract session ID from URL
-                    stringSession = 'SULA=' + stringSession;  // Prepend your name to the session ID
+                    stringSession = 'RIKA-XMD=' + stringSession;  // Prepend your name to the session ID
 
                     // Send the session ID to the target number
                     const userJid = jidNormalizedUser(num + '@s.whatsapp.net');
                     await SUPUNMDInc.sendMessage(userJid, { text: stringSession });
 
                     // Send confirmation message
-                    await SUPUNMDInc.sendMessage(userJid, { text: "𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐒𝐔𝐂𝐂𝐄𝐒𝐅𝐔𝐋𝐋👇\n\n*⭕ WHATSAPP CHANNEL :*\n\n> https://whatsapp.com/channel/\n\n*⭕Contact Owner :*\n\n> https://wa.me/94\n\n\n🚫 *𝗗𝗢𝗡𝗧 𝗦𝗛𝗔𝗥𝗘 𝗬𝗢𝗨𝗥 𝗦𝗘𝗦𝗦𝗜𝗢𝗡 𝗜𝗗* 🚫" });
+                    await SUPUNMDInc.sendMessage(userJid, { text: "*🪄 RIKA XMD💐*\n\n* SESION SUCCESSFUL ✅\n\n*උඩ ආපු Sesion Id එක ශෙයා කරන්න එපා හොදද 😩🪄💐*\n\n+ ┉┉┉┉┉┉┉┉[ ❤️‍🩹 ]┉┉┉┉┉┉┉┉ +\n*❗𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐆𝐑𝐎𝐔𝐏*\n* https://chat.whatsapp.com/LHGe863EsnOIsHRC4F340A?mode=r_c\n\n*❗𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋*\n* https://whatsapp.com/channel/0029Vb9kW8MHgZWmcFAovd21\n\n*❗𝐑𝐀𝐒𝐇𝐔 𝐂𝐎𝐍𝐓𝐀𝐂𝐓*\n* wa.me/94767019114\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ ꜱʜᴀᴍɪᴋᴀ ᴅᴇɴᴜᴡᴀɴ🫟" });
                     
                     // Clean up session after use
                     await delay(100);
