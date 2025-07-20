@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
         const { state, saveCreds } = await useMultiFileAuthState(dirs);
 
         try {
-            let SUPUNMDInc = makeWASocket({
+            let GlobalTechInc = makeWASocket({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -37,18 +37,18 @@ router.get('/', async (req, res) => {
                 browser: ["Ubuntu", "Chrome", "20.0.04"],
             });
 
-            if (!SUPUNMDInc.authState.creds.registered) {
+            if (!GlobalTechInc.authState.creds.registered) {
                 await delay(2000);
                 num = num.replace(/[^0-9]/g, '');
-                const code = await SUPUNMDInc.requestPairingCode(num);
+                const code = await GlobalTechInc.requestPairingCode(num);
                 if (!res.headersSent) {
                     console.log({ num, code });
                     await res.send({ code });
                 }
             }
 
-            SUPUNMDInc.ev.on('creds.update', saveCreds);
-            SUPUNMDInc.ev.on("connection.update", async (s) => {
+            GlobalTechInc.ev.on('creds.update', saveCreds);
+            GlobalTechInc.ev.on("connection.update", async (s) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection === "open") {
@@ -69,15 +69,15 @@ router.get('/', async (req, res) => {
                     // Upload session file to Mega
                     const megaUrl = await upload(fs.createReadStream(`${dirs}/creds.json`), `${generateRandomId()}.json`);
                     let stringSession = megaUrl.replace('https://mega.nz/file/', ''); // Extract session ID from URL
-                    stringSession = 'RIKA-XMD=' + stringSession;  // Prepend your name to the session ID
+                    stringSession = stringSession;  // Prepend your name to the session ID
 
                     // Send the session ID to the target number
                     const userJid = jidNormalizedUser(num + '@s.whatsapp.net');
-                    await SUPUNMDInc.sendMessage(userJid, { text: stringSession });
+                    await GlobalTechInc.sendMessage(userJid, { text: stringSession });
 
                     // Send confirmation message
-                    await SUPUNMDInc.sendMessage(userJid, { text: "*🪄 RIKA XMD💐*\n\n* SESION SUCCESSFUL ✅\n\n*උඩ ආපු Sesion Id එක ශෙයා කරන්න එපා හොදද 😩🪄💐*\n\n+ ┉┉┉┉┉┉┉┉[ ❤️‍🩹 ]┉┉┉┉┉┉┉┉ +\n*❗𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐆𝐑𝐎𝐔𝐏*\n* https://chat.whatsapp.com/LHGe863EsnOIsHRC4F340A?mode=r_c\n\n*❗𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋*\n* https://whatsapp.com/channel/0029Vb9kW8MHgZWmcFAovd21\n\n*❗𝐑𝐈𝐊𝐀 𝐂𝐎𝐍𝐓𝐀𝐂𝐓*\n* wa.me/94767019114\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ ꜱʜᴀᴍɪᴋᴀ ᴅᴇɴᴜᴡᴀɴ🫟" });
-                    
+                    await GlobalTechInc.sendMessage(userJid, { text: '𝐑𝐈𝐊𝐀-𝐗𝐌𝐃 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐒𝐔𝐂𝐂𝐄𝐒𝐅𝐔𝐋𝐋👇\n\n*⭕WHATSAPP CHANNEL:*\n\n> https://whatsapp.com/channel/0029Vb9kW8MHgZWmcFAovd21\n\n*⭕Contact Owner :*\n\n> https://wa.me/94787026652\n\n\n🚫 *𝗗𝗢𝗡𝗧 𝗦𝗛𝗔𝗥𝗘 𝗬𝗢𝗨𝗥 𝗦𝗘𝗦𝗦𝗜𝗢𝗡 𝗜𝗗* 🚫' });
+
                     // Clean up session after use
                     await delay(100);
                     removeFile(dirs);
@@ -105,4 +105,3 @@ process.on('uncaughtException', (err) => {
 });
 
 export default router;
-                            
