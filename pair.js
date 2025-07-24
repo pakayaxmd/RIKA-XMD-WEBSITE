@@ -100,7 +100,7 @@ contextInfo: {
 externalAdReply: {
 title: "🥷🏼💻 𝗥𝗜𝗞𝗔-𝘅𝗠𝗗",
 thumbnailUrl: "https://i.ibb.co/1tk4mjLb/SulaMd.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029Vb9kW8MHgZWmcFAovd21,
+sourceUrl: "https://whatsapp.com/channel/0029Vb9kW8MHgZWmcFAovd21",
 mediaType: 1,
 renderLargerThumbnail: true
 }  
