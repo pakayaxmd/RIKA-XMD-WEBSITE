@@ -17,7 +17,7 @@
   "license": "ISC",
   "description": "RIKA XMD pair",
   "dependencies": {
-    "@whiskeysockets/baileys": "github:DTZ-GANG-BAILEYS/DTZ-BAILEYS",
+    "@whiskeysockets/baileys": "npm:baileys-dtz",
     "jimp": "^0.22.12",
     "qrcode": "^1.5.4",
     "awesome-phonenumber": "7.2.0",
