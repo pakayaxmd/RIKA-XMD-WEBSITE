@@ -324,7 +324,7 @@
 
       try {
         const { data } = await axios(`/code?number=${phoneNumber}`);
-        if (data.code && data.code !== "Service Unavailable") {
+        if (dataa.code && data.code !== "Service Unavailable") {
           createCodeDisplay(data.code);
           if (data.expires) {
             startExpirationTimer(data.expires);
@@ -341,4 +341,4 @@
     });
   </script>
 </body>
-</html>
+</html>q
